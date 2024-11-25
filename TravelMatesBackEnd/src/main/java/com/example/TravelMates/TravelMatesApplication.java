@@ -1,56 +1,37 @@
 package com.example.TravelMates;
 
-import com.example.TravelMates.model.Traveler;
-import com.example.TravelMates.repository.TravelerRepository;
-import com.example.TravelMates.services.TravelerService;
+import com.example.TravelMates.model.Destination;
+import com.example.TravelMates.repository.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
 
 @SpringBootApplication
-public class TravelMatesApplication {
-	@Autowired
-	private TravelerService travelerService;
+public class TravelMatesApplication implements CommandLineRunner {
 
+	@Autowired
+	private DestinationRepository destinationRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TravelMatesApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner() {
-		return args -> {
+	@Override
+	public void run(String... args) throws Exception {
+		Destination destination = new Destination("Goa", "Img", 9.0);
+		Destination destination2 = new Destination("Delhi", "Img1", 8.0);
+		Destination destination3 = new Destination("keral", "Img2", 8.5);
+		// Clear existing destinations
 
-//			Traveler newTraveler = new Traveler(
-//					"John Doe",
-//					"New York City",
-//					"https://example.com/avatar.jpg",
-//					40.7128,
-//					-74.0060
-//			);
-//			Traveler savedTraveler = travelerService.createTraveler(newTraveler);
-//
-//			System.out.println("New traveler added with ID: " + savedTraveler.getId());
-//
-//			Traveler anotherTraveler = new Traveler(
-//					"Jane Smith",
-//					"San Francisco",
-//					"https://example.com/jane-avatar.jpg",
-//					37.7749,
-//					-122.4194
-//			);
-//			Traveler savedAnotherTraveler = travelerService.createTraveler(anotherTraveler);
-//			System.out.println("Another traveler added with ID: " + savedAnotherTraveler.getId());
-//
-//			System.out.println("All travelers:");
-//			travelerService.getAllTravelers().forEach(traveler ->
-//					System.out.println(traveler.getName() + " - " + traveler.getLocation())
-//			);
-//		};
-		};
+		destinationRepository.deleteAll();
+
+		// Save new destinations
+		destinationRepository.save(destination);
+		destinationRepository.save(destination2);
+
+		// Retrieve and print all destinations
+		System.out.println("All destinations:");
+		destinationRepository.findAll().forEach(System.out::println);
 	}
-
 }

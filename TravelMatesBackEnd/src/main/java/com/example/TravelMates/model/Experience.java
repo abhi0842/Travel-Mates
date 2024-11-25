@@ -56,7 +56,7 @@ public class Experience {
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return LocalDateTime.now();
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

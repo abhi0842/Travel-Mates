@@ -9,12 +9,12 @@ public class Destination {
     private String id;
     private String name;
     private String image;
-    private double rating;
+    private double  rating;
 
     // Constructors
     public Destination() {}
 
-    public Destination(String name, String image, double rating) {
+    public Destination(String name, String image, double  rating) {
         this.name = name;
         this.image = image;
         this.rating = rating;
@@ -51,5 +51,13 @@ public class Destination {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+    @Override
+    public String toString() {
+        return "Destination{" +
+                "name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }

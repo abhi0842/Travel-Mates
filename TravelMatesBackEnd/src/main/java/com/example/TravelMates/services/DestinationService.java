@@ -23,7 +23,8 @@ public class DestinationService {
     }
 
     public List<Destination> getPopularDestinations() {
-        // This is a simplified version. In a real application, you might sort by rating or popularity
+        // update this funcnality later
+
         return destinationRepository.findAll();
     }
 

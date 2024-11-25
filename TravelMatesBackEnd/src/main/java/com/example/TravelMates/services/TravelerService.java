@@ -22,8 +22,6 @@ public class TravelerService {
     }
 
     public List<Traveler> getNearbyTravelers(double latitude, double longitude, double maxDistance) {
-        // In a real application, you'd use geospatial queries here
-        // For simplicity, we're returning all travelers
         return travelerRepository.findAll();
     }
 
