@@ -1,35 +1,35 @@
 services:
   backend:
     build:
-      context: .
-      dockerfile: Dockerfile.backend
-    container_name: travel-backend
-    working_dir: /app
+      context: .               # Build backend image from current directory
+      dockerfile: Dockerfile.backend  # Use this Dockerfile for backend
+    container_name: travel-backend    # Name of the backend container
+    working_dir: /app                 # Set working directory inside container
     environment:
-      - PORT=5000
-      - MONGO_URI=mongodb://mongo:27017/travel_connect
+      - PORT=5000                    # Backend app port inside container
+      - MONGO_URI=mongodb://mongo:27017/travel_connect  # MongoDB connection string, using service name 'mongo'
     ports:
-      - "5000:5000"
+      - "5000:5000"                  # Map host port 5000 to container port 5000
     depends_on:
-      - mongo
+      - mongo                        # Backend depends on mongo service (wait for mongo to start)
 
   frontend:
     build:
-      context: ./travel-connect-frontend
-    container_name: travel-frontend
+      context: ./travel-connect-frontend  # Build frontend image from this directory
+    container_name: travel-frontend        # Name of the frontend container
     ports:
-      - "3000:80"
+      - "3000:80"                         # Map host port 3000 to container port 80 (frontend server)
     depends_on:
-      - backend
+      - backend                          # Frontend depends on backend (wait for backend to start)
 
   mongo:
-    image: mongo:6.0
-    container_name: travel-mongo
-    restart: unless-stopped
+    image: mongo:6.0                      # Use official MongoDB version 6.0 image
+    container_name: travel-mongo          # Name of the mongo container
+    restart: unless-stopped               # Restart container unless stopped manually
     environment:
-      MONGO_INITDB_DATABASE: travel_connect
+      MONGO_INITDB_DATABASE: travel_connect  # Initialize MongoDB with this database name
     volumes:
-      - mongo-data:/data/db
+      - mongo-data:/data/db               # Persist MongoDB data on host volume
 
 volumes:
-  mongo-data:
+  mongo-data:                            # Named volume to persist mongo data outside container
