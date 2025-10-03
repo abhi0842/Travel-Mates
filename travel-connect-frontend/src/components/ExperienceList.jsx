@@ -49,7 +49,7 @@ function ExperienceList() {
 
   const addExperience = async (experienceData) => {
     try {
-      const res = await fetch("http://localhost:5000/api/experiences", {
+      const res = await fetch("/api/experiences", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(experienceData)
@@ -64,7 +64,7 @@ function ExperienceList() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/experiences")
+    fetch("/api/experiences")
       .then(res => res.json())
       .then(data => setExperiences(Array.isArray(data) ? data : []))
       .catch(err => {

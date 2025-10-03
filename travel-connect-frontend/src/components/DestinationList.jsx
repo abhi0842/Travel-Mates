@@ -93,7 +93,7 @@ function DestinationList() {
   const [destinationToDelete, setDestinationToDelete] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/destinations")
+    fetch("/api/destinations")
       .then((res) => res.json())
       .then((data) => setDestinations(Array.isArray(data) ? data : []))
       .catch((err) => {
@@ -104,7 +104,7 @@ function DestinationList() {
 
   const addDestination = async (destinationData) => {
     try {
-      const res = await fetch("http://localhost:5000/api/destinations", {
+      const res = await fetch("/api/destinations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(destinationData)
@@ -127,7 +127,7 @@ function DestinationList() {
   const confirmDelete = async () => {
     if (!destinationToDelete) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/destinations/${destinationToDelete._id}`, {
+      const res = await fetch(`/api/destinations/${destinationToDelete._id}`, {
         method: "DELETE"
       });
       if (!res.ok) throw new Error("Failed to delete destination");
